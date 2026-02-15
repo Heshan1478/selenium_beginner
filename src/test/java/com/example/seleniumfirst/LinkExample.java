@@ -26,6 +26,29 @@ public class LinkExample {
         homeLink.click();
         driver.navigate().back();
 
+        //02)find my destination
+         WebElement wheretoGo = driver.findElement(By.partialLinkText("Find the URL "));
+         String path = wheretoGo.getAttribute("href");
+         System.out.println("This link is going to : " + path);
+
+        //03) Am I broken link?
+         WebElement brokenlink = driver.findElement(By.linkText("Broken?"));
+         brokenlink.click();
+
+          String title = driver.getTitle();
+          if(title.contains("404")){
+              System.out.println("The link is broken");
+          }else{
+              System.out.println("The link is not broken");
+          }
+           driver.navigate().back();
+
+
+          //04)Duplicate Link
+        homeLink.click();
+
+
+
     }
 
 }
