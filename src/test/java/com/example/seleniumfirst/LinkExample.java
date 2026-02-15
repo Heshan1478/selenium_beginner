@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
+import java.util.List;
+
 public class LinkExample {
 
     WebDriver driver;
@@ -20,7 +23,7 @@ public class LinkExample {
     }
 
     @Test
-    public void LinkTests(){
+    public void LinkTests() throws InterruptedException {
         //01) Take me to dashboard
         WebElement homeLink = driver.findElement(By.linkText("Go to Dashboard"));
         homeLink.click();
@@ -34,8 +37,9 @@ public class LinkExample {
         //03) Am I broken link?
          WebElement brokenlink = driver.findElement(By.linkText("Broken?"));
          brokenlink.click();
+         Thread.sleep(3000);
 
-          String title = driver.getTitle();
+        String title = driver.getTitle();
           if(title.contains("404")){
               System.out.println("The link is broken");
           }else{
@@ -44,11 +48,20 @@ public class LinkExample {
            driver.navigate().back();
 
 
-          //04)Duplicate Link
-        homeLink.click();
+           //04)Duplicate Link
+        WebElement homeLink1 = driver.findElement(By.linkText("Go to Dashboard"));
+        homeLink1.click();
+        driver.navigate().back();
 
+          //05)count page links
+        List<WebElement> countfullpagelinks = driver.findElements(By.tagName("a"));
+        int pageLinkcount = countfullpagelinks.size();
+        System.out.println("count of full page link:" + pageLinkcount);
 
-
+          //06) Count layout links
+         WebElement layoutelement = driver.findElement(By.className("layout-main-content"));
+         List<WebElement> countlayoutLinks =  layoutelement.findElements(By.tagName("a"));
+        System.out.println("count of layout links:" + countlayoutLinks.size());
     }
 
 }
