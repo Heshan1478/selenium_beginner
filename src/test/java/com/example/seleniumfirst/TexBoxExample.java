@@ -16,7 +16,7 @@ public class TexBoxExample {
     @BeforeMethod
     public void openLinktestPage(){
         ChromeOptions chromeoptions  = new ChromeOptions();
-        chromeoptions.setBrowserVersion("144");
+        chromeoptions.setBrowserVersion("145");
         driver = new ChromeDriver(chromeoptions);
         driver.manage().window().maximize();
         driver.get("https://www.leafground.com/input.xhtml");
